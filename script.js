@@ -55,6 +55,9 @@ operatorBtns.forEach((optBtn) => {
     () => {
         if (optBtn.textContent ==='.'){
             if (disp.slice(-1)==' ') return
+            else if (num1 !==undefined && num2!==undefined){
+                if (disp.slice(-num2.length).includes('.')) return
+            }
             else if (num1 !==undefined){
                 if (disp.slice(num1.length+3).includes('.')) return
             }
@@ -72,6 +75,7 @@ operatorBtns.forEach((optBtn) => {
                 num1= undefined;
                 num2=undefined;
                 opt=undefined;
+                optOld=undefined;
                 dispScreen.textContent = disp;
             }
             else if (disp === "") return
@@ -86,6 +90,7 @@ operatorBtns.forEach((optBtn) => {
                 num1= undefined;
                 num2=undefined;
                 opt=undefined;
+                
             }
             else if (optOld !== undefined){
                 idx = disp.lastIndexOf(optOld);
