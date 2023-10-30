@@ -53,58 +53,44 @@ numBtns.forEach((numBtn) =>{
 operatorBtns.forEach((optBtn) => {
     optBtn.addEventListener('click',
     () => {
-        if (optBtn.textContent ==='.'){
-            if (disp.slice(-1)==' ') return
-            else if (num1 !==undefined && num2!==undefined){
-                if (disp.slice(-num2.length).includes('.')) return
-            }
-            else if (num1 !==undefined){
-                if (disp.slice(num1.length+3).includes('.')) return
-            }
-            else if (num2 === undefined && disp.includes('.')) return
-            
-            disp=disp.concat('.');
+        let optOld = opt;
+        opt = optBtn.textContent;
+        
+        if (opt ==='Clear'){
+            disp = "";
+            num1= undefined;
+            num2=undefined;
+            opt=undefined;
+            optOld=undefined;
             dispScreen.textContent = disp;
         }
-        else{
-            let optOld = opt;
-            opt = optBtn.textContent;
+        else if (disp === "") return
+        else if (isNaN(disp.slice(-1)) || disp.slice(-1)===' ') return
+        else if ((opt ==='=' && optOld===undefined) || (optOld==='=' && opt==='=')) return
+        else if (opt ==='='){
+            idx = disp.lastIndexOf(optOld);
+            num2 = disp.slice(idx+2);
+            disp = disp.concat(' = ', operate(Number(num1),Number(num2),optOld));
+            dispScreen.textContent = disp;
+            disp = "";
+            num1= undefined;
+            num2=undefined;
+            opt=undefined;
             
-            if (opt ==='Clear'){
-                disp = "";
-                num1= undefined;
-                num2=undefined;
-                opt=undefined;
-                optOld=undefined;
-                dispScreen.textContent = disp;
-            }
-            else if (disp === "") return
-            else if (isNaN(disp.slice(-1)) || disp.slice(-1)===' ') return
-            else if ((opt ==='=' && optOld===undefined) || (optOld==='=' && opt==='=')) return
-            else if (opt ==='='){
-                idx = disp.lastIndexOf(optOld);
-                num2 = disp.slice(idx+2);
-                disp = disp.concat(' = ', operate(Number(num1),Number(num2),optOld));
-                dispScreen.textContent = disp;
-                disp = "";
-                num1= undefined;
-                num2=undefined;
-                opt=undefined;
-                
-            }
-            else if (optOld !== undefined){
-                idx = disp.lastIndexOf(optOld);
-                num2 = disp.slice(idx+2);
-                num1 = operate(Number(num1),Number(num2),optOld);
-                disp = disp.concat(' ',opt,' ');
-                dispScreen.textContent = disp;
-            }
-            else if (optOld === undefined){
-                num1 = disp;
-                disp = disp.concat(' ',opt,' ');
-                dispScreen.textContent = disp;
-            }
         }
+        else if (optOld !== undefined){
+            idx = disp.lastIndexOf(optOld);
+            num2 = disp.slice(idx+2);
+            num1 = operate(Number(num1),Number(num2),optOld);
+            disp = disp.concat(' ',opt,' ');
+            dispScreen.textContent = disp;
+        }
+        else if (optOld === undefined){
+            num1 = disp;
+            disp = disp.concat(' ',opt,' ');
+            dispScreen.textContent = disp;
+        }
+    
     })
 })
 

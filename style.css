@@ -1,0 +1,43 @@
+.calcBody{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+}
+.displayScreen{
+    height: 60px;
+    width: 600px;
+    border:6px solid black;
+    font-size: 30px;
+    overflow: auto;
+    color: darkmagenta;
+    background-color: yellowgreen;
+    font-weight: 800;
+}
+.calcBtns{
+    display: flex;
+    width: 600px;
+    height: 200px;
+    border:6px solid black;
+    gap: 20px;
+    justify-content: center;
+    background-color: yellowgreen;
+}
+.numBtns{
+    display: flex;
+    align-items: flex-start;
+}
+.operatorBtns{
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+button{
+    font-size: 24px;
+    font-weight: 600;
+    background-color: green;
+    color: darkmagenta;
+    border-radius: 8px;
+    padding: 8px 16px;
+}
